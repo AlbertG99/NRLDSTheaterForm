@@ -1,0 +1,28 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import javax.swing.JFormattedTextField;
+import javax.swing.JFormattedTextField.AbstractFormatter;
+
+public class DateLabelFormatter
+  extends JFormattedTextField.AbstractFormatter
+{
+  private String datePattern = "MM/dd/yyyy";
+  private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+  
+  public DateLabelFormatter() {}
+  
+  public Object stringToValue(String text) throws ParseException { return dateFormatter.parseObject(text); }
+  
+  public String valueToString(Object value)
+    throws ParseException
+  {
+    if (value != null) {
+      Calendar cal = (Calendar)value;
+      return dateFormatter.format(cal.getTime());
+    }
+    
+    return "";
+  }
+}
