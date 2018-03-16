@@ -42,6 +42,13 @@ public class Main
   
   public static void main(String[] args) throws JSONException, ParseException, InterruptedException, IOException
   {
+//	    propertySearch(getForm(), 73411121195143L, "expireDate");
+//	    setProperty(getForm(), 73411121195143L, "expireDate", "2018-03-30 23:59");
+	    
+//	    setProperty(getForm(), 73411121195143L, "status", "DISABLED");
+//	    setProperty(getForm(), 73411121195143L, "status", "ENABLED");
+//	    setProperty(getForm(), 73411121195143L, "expireDate", "2018-03-30 23:59");
+//	    System.exit(0);
     try
     {
       runProgram();
@@ -204,9 +211,6 @@ public class Main
     
     long[] formIDs = { 70678254459165L, 70678561692165L, 72127926906159L, 72128695306157L };
     
-
-
-
     for (int i = 0; i < 2; i++) {
       String toHideList = "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15";
       String ninaSlots = "";
@@ -229,6 +233,8 @@ public class Main
       updateOutput(textArea, "I. General information...");
       String title = "Theater Form for Concert on " + dateToFullWords(concert) + " - Small Role";
       setProperty(form, formID, "pagetitle", title);
+      setProperty(form, formID, "status", "DISABLED");
+      setProperty(form, formID, "status", "ENABLED");
       setProperty(form, formID, "expireDate", formDeadlineProperty);
       saveQuestionProps("text", title, form, formID, 1L);
       saveQuestionProps("subHeader", className, form, formID, 1L);
@@ -352,6 +358,8 @@ public class Main
       updateOutput(textArea, "I. General information...");
       title = "Theater Form for Concert on " + dateToFullWords(concert) + " - Big/Medium Role";
       setProperty(form, formID, "pagetitle", title);
+      setProperty(form, formID, "status", "DISABLED");
+      setProperty(form, formID, "status", "ENABLED");
       setProperty(form, formID, "expireDate", formDeadlineProperty);
       saveQuestionProps("text", title, form, formID, 1L);
       saveQuestionProps("subHeader", className, form, formID, 1L);
@@ -920,6 +928,19 @@ public class Main
     JSONObject propertiesFull = client.getFormProperties(formID);
     JSONObject properties = (JSONObject)propertiesFull.get("content");
     System.out.println(properties.get(propertyKey));
+  }
+  
+  public static void propertySearch(JotForm client, long formID, String str) throws JSONException {
+	  JSONObject propertiesFull = client.getFormProperties(formID);
+	  String propertiesFullString = propertiesFull.toString();
+	  int i = propertiesFullString.indexOf(str);
+	  System.out.println(propertiesFullString);
+//	  if (i < 1000) {
+//		  System.out.println(propertiesFullString.substring(0, i + 1000));
+//	  }
+//	  else {
+//		  System.out.println(propertiesFullString.substring(i - 1000, propertiesFullString.length()));
+//	  }
   }
   
   public static void printArray(int[] arr) {
