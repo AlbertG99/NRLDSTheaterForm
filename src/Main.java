@@ -214,11 +214,11 @@ public class Main
 			mishaFriday = true;
 		}
 		String mishaSlots = "Mon 6/6:30|Tue 6/6:30|Wed 6/6:30|Thu 6/6:30|Fri 6/6:30|Sat 11:00 am|Sat 3:30 or 4:00|Sun 11:00 am|Sun 3:30 or 4:00";
-		if (mishaFriday) {
-			mishaSlots = mishaSlots.replace("Fri 6/6:30", "Fri 6:15/6:30");
-		}
 		if (!mishaWorking) {
 			mishaSlots = mishaSlots.replace("6/6:30", "5/5:30");
+		}
+		if (mishaFriday) {
+			mishaSlots = mishaSlots.replace("Fri 5/5:30", "Fri 6/6:30");
 		}
 		String SEexamples = "";
 		if (mishaWorking) {
@@ -669,10 +669,10 @@ public class Main
 		c.gridy += 1;
 		c.gridx = 0;
 		c.gridwidth = 2;
-		panel.add(new JLabel("Misha parameters:"), c);
+		panel.add(new JLabel("Misha parameters:  "), c);
 		c.gridwidth = 1;
 		c.gridy += 1;
-		panel.add(new JLabel("DMSR:"), c);
+		panel.add(new JLabel("DMSR:  "), c);
 		c.gridx = 1;
 		panel.add(DMSR, c);
 		c.gridx = 0;
@@ -692,7 +692,7 @@ public class Main
 		panel.add(mishaWorking, c);
 		c.gridx = 0;
 		c.gridy += 1;
-		panel.add(new JLabel("Misha Fri 6:15/6:30?"), c);
+		panel.add(new JLabel("Misha Fri 6/6:30?  "), c);
 		c.gridx = 1;
 		panel.add(mishaFriday, c);
 
