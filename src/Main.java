@@ -1,5 +1,6 @@
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -200,23 +201,37 @@ public class Main
 		String[] nonOmitSlots = { (String)class1Inputs.get(3), (String)class2Inputs.get(3) };
 
 
-		boolean mishaWorking = false;
-		if (((String)generalInputs.get(7)).equals("Yes")) {
-			mishaWorking = true;
-		}
-		boolean mishaFriday = false;
-		if (((String)generalInputs.get(9)).equals("Yes")) {
-			mishaFriday = true;
-		}
+//		boolean mishaWorking = false;
+//		if (((String)generalInputs.get(7)).equals("Yes")) {
+//			mishaWorking = true;
+//		}
+//		boolean mishaFriday = false;
+//		if (((String)generalInputs.get(9)).equals("Yes")) {
+//			mishaFriday = true;
+//		}
+		String mishaDays = (String)generalInputs.get(9);
 		String mishaSlots = "Mon 6/6:30|Tue 6/6:30|Wed 6/6:30|Thu 6/6:30|Fri 6/6:30|Sat 11:00 am|Sat 3:30 or 4:00|Sun 11:00 am|Sun 3:30 or 4:00";
-		if (!mishaWorking) {
-			mishaSlots = mishaSlots.replace("6/6:30", "5/5:30");
+//		if (!mishaWorking) {
+//			mishaSlots = mishaSlots.replace("6/6:30", "5/5:30");
+//		}
+		if (mishaDays.contains("M")) {
+			mishaSlots = mishaSlots.replace("Mon 6/6:30", "Fri 5/5:30");
 		}
-		if (mishaFriday) {
-			mishaSlots = mishaSlots.replace("Fri 5/5:30", "Fri 6/6:30");
+		if (mishaDays.contains("Tu")) {
+			mishaSlots = mishaSlots.replace("Tue 6/6:30", "Tue 5/5:30");
 		}
+		if (mishaDays.contains("W")) {
+			mishaSlots = mishaSlots.replace("Wed 6/6:30", "Wed 5/5:30");
+		}
+		if (mishaDays.contains("Th")) {
+			mishaSlots = mishaSlots.replace("Thu 6/6:30", "Thu 5/5:30");
+		}
+		if (mishaDays.contains("F")) {
+			mishaSlots = mishaSlots.replace("Fri 6/6:30", "Fri 5/5:30");
+		}
+		System.out.println(mishaSlots);
 		String SEexamples = "";
-		if (mishaWorking) {
+		if (!mishaDays.contains("Tu")) {
 			SEexamples = "<p>Example 1: Your EVENT is <strong><span style=\"color: #0000ff;\">from 4 pm to 5:30 pm on a Tuesday after " + ninaEndText + "</span></strong>. You do not need to log this date as an SE. Why? Because Nina has already finished readings/line tests by " + ninaEndText + ", and Misha starts rehearsing at 6/6:30 pm on Tuesdays. Thus, your Tue 4-5:30 cannot possibly be scheduled so do not log it as SE (please, notice - <span style=\"color: #0000ff;\">You may still be scheduled for 6 pm that day <strong>unless you log this date as SE</strong></span>).</p>\n<p>Example 2: Your event is on a <span style=\"color: #0000ff;\"><strong>Saturday from 4 to 8 pm before " + mishaStartText + "</strong></span>. Do NOT log this date/time slot as SE. WHY? On Saturdays Nina finishes readings by 1:30 pm (see section III), and Misha did not start rehearsing yet. Thus, this slot cannot possibly be scheduled.</p>\n<p>Example 3: Your event is on a <strong><span style=\"color: #0000ff;\">Monday, at 6:30 pm</span></strong>. If your IMPOSSIBLE weekly conflict with Misha is <span style=\"color: #ff0000;\">Mon 6 pm</span> AND your IMPOSSIBLE weekly conflict with Nina is <span style=\"color: #ff0000;\">Mon, 5:30/6 pm</span> (not Mon 4/4:30), you do NOT have to log this date as SE. WHY? Your readings/rehearsals <strong><span style=\"color: #ff0000;\">cannot</span></strong> be scheduled on your <strong><span style=\"color: #ff0000;\">IMPOSSIBLE Mon/6 pm</span></strong> anyway (please, notice - you may still have a reading with Nina on that Monday at 4/4:30 if the date is before or on " + ninaEndText + ").</p>";
 		}
 		else {
@@ -604,22 +619,31 @@ public class Main
 		JDatePickerImpl DNFR;
 		JDatePickerImpl DMSR;
 		JDatePickerImpl concert;
-		JComboBox mishaWorking;
-		JComboBox mishaFriday;
+//		JComboBox mishaWorking;
+//		JComboBox mishaFriday;
+		JCheckBox mishaM, mishaT, mishaW, mishaTh, mishaF;
 		JComboBox dressRehearsal;
 		JDatePickerImpl vacStart;
-		JDatePickerImpl vacEnd; JDatePickerImpl deadline; JTextArea emails; try { List<String> lines = Files.readAllLines(Paths.get("DO-NOT-TOUCH/genParams.txt", new String[0]));
+		JDatePickerImpl vacEnd; JDatePickerImpl deadline; JTextArea emails;
+		
+		try {
+		List<String> lines = Files.readAllLines(Paths.get("DO-NOT-TOUCH/genParams.txt", new String[0]));
 
 		DNSR = createDatePicker((String)lines.get(0));
 		DNFR = createDatePicker((String)lines.get(1));
 		DMSR = createDatePicker((String)lines.get(2));
 		concert = createDatePicker((String)lines.get(3));
-		String[] options = { "Yes", "No" };
-		mishaWorking = new JComboBox(options);
-		mishaWorking.setSelectedItem(lines.get(7));
-		String[] optionsFriday = { "No", "Yes" };
-		mishaFriday = new JComboBox(optionsFriday);
-		mishaFriday.setSelectedItem(lines.get(9));
+//		String[] options = { "Yes", "No" };
+//		mishaWorking = new JComboBox(options);
+//		mishaWorking.setSelectedItem(lines.get(7));
+//		String[] optionsFriday = { "No", "Yes" };
+//		mishaFriday = new JComboBox(optionsFriday);
+//		mishaFriday.setSelectedItem(lines.get(9));
+		mishaM = new JCheckBox("Monday 5/5:30", lines.get(9).contains("M"));
+		mishaT = new JCheckBox("Tuesday 5/5:30", lines.get(9).contains("Tu"));
+		mishaW = new JCheckBox("Wednesday 5/5:30", lines.get(9).contains("W"));
+		mishaTh = new JCheckBox("Thursday 5/5:30", lines.get(9).contains("Th"));
+		mishaF = new JCheckBox("Friday 5/5:30", lines.get(9).contains("F"));
 		String[] optionsDress = { "Sat", "Fri/Sat" };
 		dressRehearsal = new JComboBox(optionsDress);
 		dressRehearsal.setSelectedItem(lines.get(10));
@@ -632,10 +656,15 @@ public class Main
 			DNFR = createDatePicker();
 			DMSR = createDatePicker();
 			concert = createDatePicker();
-			String[] options = { "Yes", "No" };
-			mishaWorking = new JComboBox(options);
-			String[] optionsFriday = { "No", "Yes" };
-			mishaFriday = new JComboBox(optionsFriday);
+//			String[] options = { "Yes", "No" };
+//			mishaWorking = new JComboBox(options);
+//			String[] optionsFriday = { "No", "Yes" };
+//			mishaFriday = new JComboBox(optionsFriday);
+			mishaM = new JCheckBox("Monday 5/5:30");
+			mishaT = new JCheckBox("Tuesday 5/5:30");
+			mishaW = new JCheckBox("Wednesday 5/5:30");
+			mishaTh = new JCheckBox("Thursday 5/5:30");
+			mishaF = new JCheckBox("Friday 5/5:30");
 			String[] optionsDress = { "Sat", "Fri/Sat" };
 			dressRehearsal = new JComboBox(optionsDress);
 			vacStart = createDatePicker();
@@ -647,7 +676,7 @@ public class Main
 		c.gridy = 0;
 		c.gridx = 0;
 		c.gridwidth = 2;
-		panel.add(new JLabel("Nina parameters:"), c);
+		panel.add(new JLabel("Nina parameters:  ------------------"), c);
 		c.gridwidth = 1;
 		c.gridy += 1;
 		panel.add(new JLabel("DNSR:"), c);
@@ -662,7 +691,7 @@ public class Main
 		c.gridy += 1;
 		c.gridx = 0;
 		c.gridwidth = 2;
-		panel.add(new JLabel("Misha parameters:  "), c);
+		panel.add(new JLabel("Misha parameters:  ------------------"), c);
 		c.gridwidth = 1;
 		c.gridy += 1;
 		panel.add(new JLabel("DMSR:  "), c);
@@ -679,20 +708,31 @@ public class Main
 		c.gridx = 1;
 		panel.add(dressRehearsal, c);
 		c.gridx = 0;
+//		c.gridy += 1;
+//		panel.add(new JLabel("Misha working?  "), c);
+//		c.gridx = 1;
+//		panel.add(mishaWorking, c);
+//		c.gridx = 0;
 		c.gridy += 1;
-		panel.add(new JLabel("Misha working?  "), c);
+		panel.add(new JLabel("Misha start early?  "), c);
 		c.gridx = 1;
-		panel.add(mishaWorking, c);
+		panel.add(mishaM, c);
 		c.gridx = 0;
 		c.gridy += 1;
-		panel.add(new JLabel("Misha Fri 6/6:30?  "), c);
+		panel.add(new JLabel("    (default 6/6:30)"), c);
 		c.gridx = 1;
-		panel.add(mishaFriday, c);
+		panel.add(mishaT, c);
+		c.gridy += 1;
+		panel.add(mishaW, c);
+		c.gridy += 1;
+		panel.add(mishaTh, c);
+		c.gridy += 1;
+		panel.add(mishaF, c);
 
 		c.gridy += 1;
 		c.gridx = 0;
 		c.gridwidth = 2;
-		panel.add(new JLabel("Vacation parameters:"), c);
+		panel.add(new JLabel("Vacation parameters:  ------------------"), c);
 		c.gridwidth = 1;
 		c.gridy += 1;
 		panel.add(new JLabel("Vac start:"), c);
@@ -707,7 +747,7 @@ public class Main
 		c.gridy += 1;
 		c.gridx = 0;
 		c.gridwidth = 2;
-		panel.add(new JLabel("Other parameters:"), c);
+		panel.add(new JLabel("Other parameters:  ------------------"), c);
 		c.gridwidth = 1;
 		c.gridy += 1;
 		panel.add(new JLabel("End of access:"), c);
@@ -733,6 +773,23 @@ public class Main
 			System.exit(0);
 		}
 
+		String mishaDays = "";
+		if (mishaM.isSelected()) {
+			mishaDays += "M";
+		}
+		if (mishaT.isSelected()) {
+			mishaDays += "Tu";
+		}
+		if (mishaW.isSelected()) {
+			mishaDays += "W";
+		}
+		if (mishaTh.isSelected()) {
+			mishaDays += "Th";
+		}
+		if (mishaF.isSelected()) {
+			mishaDays += "F";
+		}
+		
 		inputs.add(DNSR.getJFormattedTextField().getText());
 		inputs.add(DNFR.getJFormattedTextField().getText());
 		inputs.add(DMSR.getJFormattedTextField().getText());
@@ -740,9 +797,11 @@ public class Main
 		inputs.add(vacStart.getJFormattedTextField().getText());
 		inputs.add(vacEnd.getJFormattedTextField().getText());
 		inputs.add(deadline.getJFormattedTextField().getText());
-		inputs.add(mishaWorking.getSelectedItem().toString());
+//		inputs.add(mishaWorking.getSelectedItem().toString());
+		inputs.add("");
 		inputs.add(emails.getText().trim().replaceAll("\n", ","));
-		inputs.add(mishaFriday.getSelectedItem().toString());
+		//inputs.add(mishaFriday.getSelectedItem().toString());
+		inputs.add(mishaDays);
 		inputs.add(dressRehearsal.getSelectedItem().toString());
 
 		writeFile("DO-NOT-TOUCH/genParams.txt", inputs);
