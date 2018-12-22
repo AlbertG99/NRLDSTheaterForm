@@ -101,8 +101,6 @@ public class Main
 
 		String concert = (String)generalInputs.get(3);
 		boolean drFriday = ((String)generalInputs.get(10)).equals("Fri/Sat");
-		//System.out.println(drFriday);
-		//System.exit(0);
 
 		String concertText = dateToWords(concert);
 		Date concertDate = dateFormat.parse(concert);
@@ -122,8 +120,6 @@ public class Main
 			dressRehearsal2Date = dateFormat.parse(dressRehearsal2);
 			dressRehearsal2Text = dateToWords(dressRehearsal2);
 		}
-		//System.out.println(concertDate + "" + dressRehearsalDate + "" + dressRehearsal2Date);
-		//System.exit(0);
 
 		Date lastRehearsalDate = new Date(dressRehearsal2Date.getTime() - 2L);
 		String lastRehearsal = dateFormat.format(lastRehearsalDate);
@@ -199,7 +195,6 @@ public class Main
 		int[][] ninaSlotChoices = { ninaSlotChoices1, ninaSlotChoices2 };
 		int[] ninaClassSlots = { ninaClassSlot1, ninaClassSlot2 };
 		String[] ninaSlotsArray = { "Mon from 4 or 4:30 pm for 60-90 min", "Mon from 5:30 or 6 pm for 60-90 min", "Tue from 4 or 4:30 pm for 60-90 min", "Tue from 5:30 or 6 pm for 60-90 min", "Wed from 3:30 or 4 pm for 60-90 min", "Wed from 4 or 4:30 pm for 60-90 min", "Wed from 5:30 or 6 pm for 60-90 min", "Thu from 3:30 or 4 pm for 60-90 min", "Thu from 4 or 4:30 pm for 60-90 min", "Thu from 5:30 or 6 pm for 60-90 min", "Fri from 3:30 or 4 pm for 60-90 min", "Fri from 4 or 4:30 pm for 60-90 min", "Fri from 5:30 or 6 pm for 60-90 min", "Sat from 10 am for 60-90 min", "Sat from 11:30 am or 12 pm for 60-90 min", "Sun from 10 am for 60-90 min" };
-		System.out.println(ninaSlotsArray.length);
 		long[] ninaQsBM = { 88L, 92L, 89L, 93L, 406L, 352L, 407L, 408L, 414L, 410L, 411L, 412L, 413L, 0, 98L, 0 };
 		long[] ninaQsSm = { 88L, 92L, 89L, 93L, 418L, 352L, 419L, 420L, 421L, 422L, 423L, 424L, 425L, 0, 98L, 0 };
 		String[] nonOmitSlots = { (String)class1Inputs.get(3), (String)class2Inputs.get(3) };
@@ -230,7 +225,7 @@ public class Main
 
 		String[] classNames = { (String)class1Inputs.get(0), (String)class2Inputs.get(0) };
 
-		//System.exit(0); // EXITS PROGRAM BEFORE DEPLOYING CHANGES
+		System.exit(0); // EXITS PROGRAM BEFORE DEPLOYING CHANGES
 		
 		JotForm form = getForm();
 
@@ -239,7 +234,6 @@ public class Main
 		for (int i = 0; i < 2; i++) {
 			String toHideList = "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15";
 			String ninaSlots = "";
-			System.out.println(arrayToString(ninaSlotChoices[0]));
 			for (int slotNum : ninaSlotChoices[i]) {
 				if (slotNum != ninaClassSlots[i]) {
 					ninaSlots = ninaSlots + "|" + ninaSlotsArray[slotNum];
@@ -590,7 +584,6 @@ public class Main
 		Calendar c = Calendar.getInstance();
 		c.setTime(new SimpleDateFormat("dd/MM/yyyy").parse(date));
 		int dayOfWeek = c.get(7);
-		System.out.println(dayOfWeek);
 		String[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 		return days[(dayOfWeek - 1)];
 	}
