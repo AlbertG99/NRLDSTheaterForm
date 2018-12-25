@@ -240,7 +240,7 @@ public class Main
 
 		String[] classNames = { (String)class1Inputs.get(0), (String)class2Inputs.get(0) };
 
-		System.exit(0); // EXITS PROGRAM BEFORE DEPLOYING CHANGES
+		//System.exit(0); // EXITS PROGRAM BEFORE DEPLOYING CHANGES
 		
 		JotForm form = getForm();
 
@@ -408,10 +408,17 @@ public class Main
 			saveQuestionProps("subHeader", className, form, formID, 380L);
 
 			introText = "<p class=\"p1\"><span style=\"font-size: 10pt;\"><span class=\"s1\" style=\"color: #ff0000;\">*</span><span class=\"s2\"> indicates a required question. You will not be able to submit the form without answering the question.</span></span></p><p class=\"p1\"><span class=\"s2\" style=\"font-size: 10pt;\"><strong>For help</strong>: Move your mouse&nbsp;over a question and read the information in the popup.</span></p><p class=\"p1\"><span class=\"s2\" style=\"font-size: 10pt;\">Please note: Every actor will be busy the whole day on <strong>Saturday, " + dateToFullWords(dressRehearsal) + "</strong> and on <strong>Sunday, " + dateToFullWords(concert) + "</strong>.</span></p>";
+			if (drFriday) {
+				introText = "<p class=\"p1\"><span style=\"font-size: 10pt;\"><span class=\"s1\" style=\"color: #ff0000;\">*</span><span class=\"s2\"> indicates a required question. You will not be able to submit the form without answering the question.</span></span></p><p class=\"p1\"><span class=\"s2\" style=\"font-size: 10pt;\"><strong>For help</strong>: Move your mouse&nbsp;over a question and read the information in the popup.</span></p><p class=\"p1\"><span class=\"s2\" style=\"font-size: 10pt;\">Please note: Every actor will be busy after 4pm on <strong>Friday, " + dateToFullWords(dressRehearsal2) + "</strong>, after 1:30pm on <strong>Saturday, " + dateToFullWords(dressRehearsal) + "</strong>, and the whole day on <strong>Sunday, " + dateToFullWords(concert) + "</strong>.</span></p>";
+			}
 			saveQuestionProps("text", introText, form, formID, 11L);
 
-			saveQuestionProps("text", "<p>In addition, every actor will have a dress rehearsal on stage on Saturday, " + dateToFullWords(dressRehearsal) + ".</p>", form, formID, 397L);
-
+			inAdditionText = "<p>In addition, every actor will have a dress rehearsal on stage on Saturday, " + dateToFullWords(dressRehearsal) + ".</p>";
+			if (drFriday) {
+				inAdditionText = "<p>In addition, every actor will have a dress rehearsal on stage on Friday, " + dateToFullWords(dressRehearsal2) + " after 4pm AND/OR Saturday, " + dateToFullWords(dressRehearsal) + " after 1:30pm.</p>";
+			}
+			saveQuestionProps("text", inAdditionText, form, formID, 397L);
+			
 			saveQuestionProps("text", "<p><span style=\"font-size:12pt;\">We will try to satisfy your request but cannot promise.</span></p>\n<p><span style=\"font-size:12pt;\">Keep in mind that you <strong>will be able to make changes</strong> in this form after submission until " + formDeadlineText + ". When you click Submit at the very end, you will get an automatic email with instructions on how to edit your submitted form.</span></p>", form, formID, 10L);
 
 			updateOutput(textArea, "II. Rehearsals with Misha...");
