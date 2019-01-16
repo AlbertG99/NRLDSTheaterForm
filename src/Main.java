@@ -215,7 +215,7 @@ public class Main
 //			mishaSlots = mishaSlots.replace("6/6:30", "5/5:30");
 //		}
 		if (mishaDays.contains("M")) {
-			mishaSlots = mishaSlots.replace("Mon 6/6:30", "Fri 5/5:30");
+			mishaSlots = mishaSlots.replace("Mon 6/6:30", "Mon 5/5:30");
 		}
 		if (mishaDays.contains("Tu")) {
 			mishaSlots = mishaSlots.replace("Tue 6/6:30", "Tue 5/5:30");
