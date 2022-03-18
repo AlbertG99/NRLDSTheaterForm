@@ -199,6 +199,9 @@ public class Main
 		long[] ninaQsBM = { 88L, 92L, 89L, 93L, 406L, 352L, 407L, 408L, 414L, 410L, 411L, 412L, 413L, 0, 98L, 0 };
 		long[] ninaQsSm = { 88L, 92L, 89L, 93L, 418L, 352L, 419L, 420L, 421L, 422L, 423L, 424L, 425L, 0, 98L, 0 };
 		String[] nonOmitSlots = { (String)class1Inputs.get(3), (String)class2Inputs.get(3) };
+		final String type1Options = "Both 3:30 and 4 pm are OK|3:30 pm only (I have to leave at 5)|4 pm only (I cannot arrive earlier)";
+		final String type2Options = "Both 4 and 4:30 pm are OK|4 pm only (I have to leave at 5:30)|4:30 pm only (I cannot arrive earlier)";
+		final String type3Options = "Both 5:30 and 6 pm are OK|5:30 pm only (I have to leave at 7)|6 pm only (I cannot arrive earlier)";
 
 
 //		boolean mishaWorking = false;
@@ -247,7 +250,7 @@ public class Main
 		long[] formIDs = { 70678254459165L, 70678561692165L, 72127926906159L, 72128695306157L };
 
 		for (int i = 0; i < 2; i++) {
-			String toHideList = "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15";
+			String toHideList = "|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|";
 			String ninaSlots = "";
 			for (int slotNum : ninaSlotChoices[i]) {
 				if (slotNum != ninaClassSlots[i]) {
@@ -259,6 +262,8 @@ public class Main
 					toHideList = toHideList.replace("|" + Integer.toString(slotNum) + "|", "||"); }
 			}
 			ninaSlots = ninaSlots.substring(1);
+			System.out.println(ninaSlots);
+			
 
 			String className = classNames[i];
 
@@ -317,6 +322,16 @@ public class Main
 				if (ninaQsSm[slotNum] != 0L)
 				{
 
+
+					if (ninaSlotsArray[slotNum].contains("3:30 or 4 pm")) {
+						saveQuestionProps("options", type1Options, form, formID, ninaQsSm[slotNum]);
+					}
+					else if (ninaSlotsArray[slotNum].contains("4 or 4:30 pm")) {
+						saveQuestionProps("options", type2Options, form, formID, ninaQsSm[slotNum]);
+					}
+					else if (ninaSlotsArray[slotNum].contains("5:30 or 6 pm")) {
+						saveQuestionProps("options", type3Options, form, formID, ninaQsSm[slotNum]);
+					}
 					if (slotNum == ninaClassSlots[i]) {
 						saveQuestionProps("options", nonOmitSlots[i], form, formID, ninaQsSm[slotNum]);
 					}
@@ -449,6 +464,17 @@ public class Main
 				if (ninaQsBM[slotNum] != 0L)
 				{
 
+					if (ninaSlotsArray[slotNum].contains("3:30 or 4 pm")) {
+						saveQuestionProps("options", type1Options, form, formID, ninaQsBM[slotNum]);
+
+					}
+					else if (ninaSlotsArray[slotNum].contains("4 or 4:30 pm")) {
+						saveQuestionProps("options", type2Options, form, formID, ninaQsBM[slotNum]);
+					}
+					else if (ninaSlotsArray[slotNum].contains("5:30 or 6 pm")) {
+						saveQuestionProps("options", type3Options, form, formID, ninaQsBM[slotNum]);
+					}
+					
 					if (slotNum == ninaClassSlots[i]) {
 						saveQuestionProps("options", nonOmitSlots[i], form, formID, ninaQsBM[slotNum]);
 					}
@@ -549,7 +575,7 @@ public class Main
 	}
 
 	public static JotForm getForm() throws JSONException {
-		JotForm client = new JotForm("9b8aa353e102a575e37733dcf14cd8b0");
+		JotForm client = new JotForm("766405aab986afaa7bea53d507703bc2");
 		return client;
 	}
 

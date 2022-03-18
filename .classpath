@@ -6,9 +6,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/Users/albertgerovitch/Documents/Workspace/NinaTheaterForm/jars/jdatepicker-1.3.4.jar"/>
-	<classpathentry kind="lib" path="/Users/albertgerovitch/Documents/Workspace/NinaTheaterForm/jars/JotForm API/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/Users/albertgerovitch/Documents/Workspace/NinaTheaterForm/jars/JotForm API/httpclient-4.2.5.jar"/>
-	<classpathentry kind="lib" path="/Users/albertgerovitch/Documents/Workspace/NinaTheaterForm/jars/JotForm API/httpcore-4.2.4.jar"/>
+	<classpathentry kind="lib" path="/Users/albertgerovitch/Documents/GitHub/NRLDSTheaterForm/jars/jdatepicker-1.3.4.jar"/>
+	<classpathentry kind="lib" path="/Users/albertgerovitch/Documents/GitHub/NRLDSTheaterForm/jars/JotForm API/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/albertgerovitch/Documents/GitHub/NRLDSTheaterForm/jars/JotForm API/httpclient-4.2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/albertgerovitch/Documents/GitHub/NRLDSTheaterForm/jars/JotForm API/httpcore-4.2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
